@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {ConnectionMode} from '../../models/enums/connection-mode';
 import {AnalysisMode} from '../../models/enums/analysis-mode';
 import {AnalysisRequest} from '../../models/interfaces/analysis-request';
+import {TextAnalyzer} from '../../services/text-analyzer';
 
 
 @Component({
@@ -14,6 +15,8 @@ import {AnalysisRequest} from '../../models/interfaces/analysis-request';
 })
 export class AnalyzerInput {
 
+  constructor(private analyzerService: TextAnalyzer) {
+  }
   protected readonly ConnectionMode = ConnectionMode;
   protected readonly AnalysisMode = AnalysisMode;
 
@@ -34,5 +37,6 @@ export class AnalyzerInput {
       connectionMode: this.connectionMode,
       analysisMode: this.analysisMode
     }
+    this.analyzerService.analyze(request);
   }
 }

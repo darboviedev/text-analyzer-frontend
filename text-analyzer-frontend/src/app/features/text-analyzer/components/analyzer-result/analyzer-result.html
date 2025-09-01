@@ -1,1 +1,21 @@
-<p>analyzer-result works!</p>
+@if (result$ | async; as result) {
+  <h3>Analysis Result</h3>
+  <p>Mode: {{ result.analysisMode }}</p>
+  <p>Connection: {{ result.connectionMode }}</p>
+
+  <table>
+    <tr>
+      @for (entry of result.letterCount | keyvalue; track entry.key) {
+        <th>   {{ entry.key }}  </th>
+      }
+    </tr>
+    <tr>
+      @for (entry of result.letterCount | keyvalue; track entry.key) {
+        <th>{{ entry.value }}</th>
+      }
+    </tr>
+  </table>
+
+} @else {
+  <p>No analysis yet. Please enter text and click "Analyze".</p>
+}
