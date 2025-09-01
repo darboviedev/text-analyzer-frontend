@@ -1,1 +1,30 @@
-<p>analyzer-history works!</p>
+@if (history$ | async; as history) {
+  @if (history.length === 0) {
+    <p>No recent history.</p>
+  } @else {
+    <ul class="result-list">
+      @for (item of history; track $index) {
+        <li class="result-item">
+          <div class="meta">
+            <p><span>Connection: </span> {{ item.connectionMode }}&nbsp;&nbsp; <span>Mode: </span>{{ item.analysisMode }}</p>
+          </div>
+
+          <div class="count-table">
+            <table>
+              <tr>
+                @for (entry of item.letterCount | keyvalue; track entry.key) {
+                  <th>   {{ entry.key }}  </th>
+                }
+              </tr>
+              <tr>
+                @for (entry of item.letterCount | keyvalue; track entry.value) {
+                  <th>{{ entry.value }}</th>
+                }
+              </tr>
+            </table>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+}

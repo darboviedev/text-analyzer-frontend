@@ -1,0 +1,15 @@
+span {
+  font-weight: bold;
+}
+th {
+  padding-left: 1em;
+  padding-right: 0.5em;
+}
+table {
+  text-align: right;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+table, th, td {
+  border: 1px solid black;
+}

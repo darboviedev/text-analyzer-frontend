@@ -5,7 +5,19 @@ th {
 table {
   text-align: right;
   border-collapse: collapse;
+  margin-top: 1em;
 }
 table, th, td {
   border: 1px solid;
 }
+
+span {
+  font-weight: bold;
+}
+
+.container#result {
+  margin-left: 2em;
+  margin-top: 2em;
+}
+
+
