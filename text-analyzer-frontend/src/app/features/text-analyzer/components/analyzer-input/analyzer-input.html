@@ -1,1 +1,31 @@
-<p>analyzer-input works!</p>
+<div class="container" id="input-main">
+
+  <div class="container" id="input-modes">
+    <mat-button-toggle-group name="connectionMode" hideSingleSelectionIndicator = "true"
+                             [(ngModel)]="connectionMode">
+      <mat-button-toggle [value]=ConnectionMode.ONLINE >Online</mat-button-toggle>
+      <mat-button-toggle [value]=ConnectionMode.OFFLINE>Offline</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-button-toggle-group name="analysisMode" hideSingleSelectionIndicator = "true"
+                             [(ngModel)]="analysisMode">
+      <mat-button-toggle [value]=AnalysisMode.VOWELS >Vowels</mat-button-toggle>
+      <mat-button-toggle [value]=AnalysisMode.CONSONANTS>Consonants</mat-button-toggle>
+    </mat-button-toggle-group>
+
+  </div>
+
+  <div class="container" id="input-textarea">
+    <mat-form-field class="large-textarea">
+    <textarea matInput placeholder="Enter your text here ..."
+              [(ngModel)]="analysisText"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="15"
+              cdkAutosizeMaxRows="15"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="container" id="input-buttons">
+    <button matButton="tonal" [disabled]="!analysisText" (click)="reset()">Reset</button>
+    <button matButton="tonal" [disabled]="!analysisText" (click)="analyze()">Analyze</button>
+
+  </div>
+</div>
