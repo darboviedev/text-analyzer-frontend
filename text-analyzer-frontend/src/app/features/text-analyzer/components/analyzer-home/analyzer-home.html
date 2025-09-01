@@ -1,1 +1,25 @@
-<p>analyzer-home works!</p>
+<div class="wrapper" id="analyzerHome">
+  <mat-toolbar color="primary">
+    <h1>Text Analyzer</h1>
+  </mat-toolbar>
+
+  <div class="container" id="home">
+
+    <div class="container" id="inputResult">
+
+      <mat-card class="analyzer-input">
+        <app-analyzer-input></app-analyzer-input>
+      </mat-card>
+
+      <mat-card class="analyzer-result">
+        <app-analyzer-result></app-analyzer-result>
+      </mat-card>
+
+    </div>
+
+    <mat-card class="analyzer-history">
+      <app-analyzer-history></app-analyzer-history>
+    </mat-card>
+
+  </div>
+</div>
