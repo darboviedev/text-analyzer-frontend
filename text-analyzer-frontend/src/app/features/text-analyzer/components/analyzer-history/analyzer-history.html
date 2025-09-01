@@ -17,7 +17,7 @@
                 }
               </tr>
               <tr>
-                @for (entry of item.letterCount | keyvalue; track entry.value) {
+                @for (entry of item.letterCount | keyvalue; track entry.key) {
                   <th>{{ entry.value }}</th>
                 }
               </tr>
