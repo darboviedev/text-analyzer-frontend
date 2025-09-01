@@ -5,10 +5,11 @@ import {AnalysisResult} from '../models/interfaces/analysis-result';
 import {AnalysisMode} from '../models/enums/analysis-mode';
 import {ConnectionMode} from '../models/enums/connection-mode';
 import {ResultProvider} from './result-provider';
-import {catchError, map, Observable, of} from 'rxjs';
+import {catchError, map, Observable, of, throwError} from 'rxjs';
 import {AnalysisHttpResponse} from '../models/interfaces/analysis-http-response';
 import {HttpService} from '../../../core/http-service';
 import {environment} from '../ressources/environment-constants';
+import {AlertService} from '../../../core/alert-service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ import {environment} from '../ressources/environment-constants';
 export class TextAnalyzer {
 
 
-  constructor(private resultProvider: ResultProvider, private httpService: HttpService) {}
+  constructor(private resultProvider: ResultProvider, private httpService: HttpService,
+  private alertService: AlertService) {}
 
 // List of vowels is imported from vowels.json
   private vowelSet = new Set(vowels.vowels);
@@ -26,9 +28,15 @@ export class TextAnalyzer {
     if (request.connectionMode === ConnectionMode.OFFLINE) {
       this.resultProvider.setResult(this.analyzeOffline(request));
     } else {
-      this.resultProvider.setResult(this.analyzeOnline(request));
-    }
+      const online$ = this.analyzeOnline(request).pipe(
+        catchError(err => {
+          this.alertService.showError(err.message);
+          return throwError(() => err);
+        })
+      );
 
+      this.resultProvider.setResult(online$);
+    }
   }
 
   public analyzeOnline(request: AnalysisRequest): Observable<AnalysisResult> {
@@ -38,9 +46,9 @@ export class TextAnalyzer {
         analysisMode: request.analysisMode,
         connectionMode: request.connectionMode
       })),
-      catchError(err => {
-        console.error('Online analysis failed, fallback to offline', err);
-        return this.analyzeOffline(request);
+      catchError(() => {
+        return throwError(() => new Error('Online analysis failed. Please try again or switch to offline ' +
+          'analysis.'));
       })
     );
   }
