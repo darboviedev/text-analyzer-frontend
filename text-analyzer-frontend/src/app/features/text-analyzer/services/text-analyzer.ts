@@ -10,12 +10,12 @@ import {AnalysisHttpResponse} from '../models/interfaces/analysis-http-response'
 import {HttpService} from '../../../core/http-service';
 import {environment} from '../ressources/environment-constants';
 import {AlertService} from '../../../core/alert-service';
+import {ErrorMessages} from '../ressources/error-messages';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TextAnalyzer {
-
 
   constructor(private resultProvider: ResultProvider, private httpService: HttpService,
   private alertService: AlertService) {}
@@ -40,15 +40,14 @@ export class TextAnalyzer {
   }
 
   public analyzeOnline(request: AnalysisRequest): Observable<AnalysisResult> {
-    return this.httpService.post<AnalysisHttpResponse>(environment.endpointAnalysis, request).pipe(
+    return this.httpService.post<AnalysisHttpResponse>(environment.httpEndpointAnalysis, request).pipe(
       map(response => ({
         letterCount: new Map<string, number>(Object.entries(response.letterCounts)),
         analysisMode: request.analysisMode,
         connectionMode: request.connectionMode
       })),
       catchError(() => {
-        return throwError(() => new Error('Online analysis failed. Please try again or switch to offline ' +
-          'analysis.'));
+        return throwError(() => new Error(ErrorMessages.ONLINE_ANALYSIS_FAILED));
       })
     );
   }

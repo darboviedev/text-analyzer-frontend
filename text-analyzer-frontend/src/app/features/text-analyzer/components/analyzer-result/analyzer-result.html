@@ -5,18 +5,23 @@
     <p><span>Connection: </span> {{ result.connectionMode }}</p>
     <p><span>Mode: </span>{{ result.analysisMode }}</p>
 
-    <table>
-      <tr>
-        @for (entry of result.letterCount | keyvalue; track entry.key) {
-          <th>   {{ entry.key }}  </th>
-        }
-      </tr>
-      <tr>
-        @for (entry of result.letterCount | keyvalue; track entry.key) {
-          <th>{{ entry.value }}</th>
-        }
-      </tr>
-    </table>
+    @if (result.letterCount.size > 0) {
+      <table>
+        <tr>
+          @for (entry of result.letterCount | keyvalue; track entry.key) {
+            <th>   {{ entry.key }}  </th>
+          }
+        </tr>
+        <tr>
+          @for (entry of result.letterCount | keyvalue; track entry.key) {
+            <th>{{ entry.value }}</th>
+          }
+        </tr>
+      </table>
+    } @else {
+      <p>Text contains no <strong>{{result.analysisMode}}</strong> </p>
+    }
+
   </div>
 
 } @else {
