@@ -44,7 +44,8 @@ export class TextAnalyzer {
       map(response => ({
         letterCount: new Map<string, number>(Object.entries(response.letterCounts)),
         analysisMode: request.analysisMode,
-        connectionMode: request.connectionMode
+        connectionMode: request.connectionMode,
+        analysisText: request.analysisText
       })),
       catchError(() => {
         return throwError(() => new Error(ErrorMessages.ONLINE_ANALYSIS_FAILED));
@@ -69,7 +70,8 @@ export class TextAnalyzer {
     const result: AnalysisResult = {
       letterCount: letters,
       analysisMode: request.analysisMode,
-      connectionMode: request.connectionMode
+      connectionMode: request.connectionMode,
+      analysisText: request.analysisText
     };
 
     return of(result);

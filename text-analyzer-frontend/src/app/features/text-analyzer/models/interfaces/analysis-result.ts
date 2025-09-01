@@ -5,4 +5,5 @@ export interface AnalysisResult {
   letterCount: Map<string, number>;
   analysisMode: AnalysisMode;
   connectionMode: ConnectionMode;
+  analysisText: string;
 }
