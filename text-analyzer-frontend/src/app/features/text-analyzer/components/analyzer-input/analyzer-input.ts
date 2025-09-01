@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {MaterialImports} from '../../../../shared/material-imports';
 import {FormsModule} from '@angular/forms';
-import {ConnectionMode} from '../models/enums/connection-mode';
-import {AnalysisMode} from '../models/enums/analysis-mode';
-import {AnalysisRequest} from '../models/interfaces/analysis-request';
+import {ConnectionMode} from '../../models/enums/connection-mode';
+import {AnalysisMode} from '../../models/enums/analysis-mode';
+import {AnalysisRequest} from '../../models/interfaces/analysis-request';
+
 
 @Component({
   selector: 'app-analyzer-input',
