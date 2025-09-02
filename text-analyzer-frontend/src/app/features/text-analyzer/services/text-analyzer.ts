@@ -39,7 +39,7 @@ export class TextAnalyzer {
     }
   }
 
-  public analyzeOnline(request: AnalysisRequest): Observable<AnalysisResult> {
+  analyzeOnline(request: AnalysisRequest): Observable<AnalysisResult> {
     return this.httpService.post<AnalysisHttpResponse>(environment.httpEndpointAnalysis, request).pipe(
       map(response => ({
         letterCount: new Map<string, number>(Object.entries(response.letterCounts)),

@@ -26,6 +26,9 @@
   <div class="container" id="input-buttons">
     <button matButton="tonal" [disabled]="!analysisText" (click)="reset()">Reset</button>
     <button matButton="tonal" [disabled]="!analysisText" (click)="analyze()">Analyze</button>
-
   </div>
+  <div class="container" id="reset-button">
+    <button matButton="tonal" (click)="resetAll()">Reset Results</button>
+  </div>
+
 </div>

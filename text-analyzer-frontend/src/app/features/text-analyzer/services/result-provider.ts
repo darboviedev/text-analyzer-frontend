@@ -18,4 +18,8 @@ export class ResultProvider {
       this.historySubject.next([result, ...this.historySubject.value]);
     });
   }
+  public reset() {
+    this.resultSubject.next(null);
+    this.historySubject.next([]);
+  }
 }

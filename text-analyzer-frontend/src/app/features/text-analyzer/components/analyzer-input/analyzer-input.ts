@@ -5,6 +5,7 @@ import {ConnectionMode} from '../../models/enums/connection-mode';
 import {AnalysisMode} from '../../models/enums/analysis-mode';
 import {AnalysisRequest} from '../../models/interfaces/analysis-request';
 import {TextAnalyzer} from '../../services/text-analyzer';
+import {ResultProvider} from '../../services/result-provider';
 
 
 @Component({
@@ -15,7 +16,7 @@ import {TextAnalyzer} from '../../services/text-analyzer';
 })
 export class AnalyzerInput {
 
-  constructor(private analyzerService: TextAnalyzer) {
+  constructor(private analyzerService: TextAnalyzer, private resultProvider: ResultProvider) {
   }
   protected readonly ConnectionMode = ConnectionMode;
   protected readonly AnalysisMode = AnalysisMode;
@@ -29,6 +30,9 @@ export class AnalyzerInput {
     this.analysisText = '';
     this.connectionMode = ConnectionMode.ONLINE;
     this.analysisMode = AnalysisMode.VOWELS;
+  }
+  protected resetAll(){
+    this.resultProvider.reset();
   }
 
   protected analyze() {
